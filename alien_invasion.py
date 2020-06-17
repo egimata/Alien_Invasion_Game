@@ -12,7 +12,7 @@ def run_game():
     while True:
 
         #keyboard&mouse
-        for event in game.event.get():
+        for event in pygame.event.get():
             if event.type == pygame.quit():
                 sys.exit()
         
