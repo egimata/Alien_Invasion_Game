@@ -1,29 +1,27 @@
 import sys 
-
 import pygame
+from settings import Settings
+
 
 def run_game():
     #creating screen object
     pygame.init()
-    screen = pygame.display.set_mode((1400, 900))
+    ai_settings = Settings()
+    screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
-
-    #background color
-    bg_color = (204, 204, 204)
 
     #main loop of the game
     while True:
 
         #keyboard&mouse
         for event in pygame.event.get():
-            screen.fill(bg_color)
-            #make screen visible
-            # pygame.display.flip()
+
+            #fill screen with bg color
+            screen.fill(ai_settings.bg_color) 
             if event.type == pygame.QUIT:
                 sys.exit()
-        
+        #make screen visible
         pygame.display.flip()
-
     
     
 run_game()
