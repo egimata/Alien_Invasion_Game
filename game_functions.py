@@ -10,6 +10,11 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_left = True
     #adding button to fire bullets
     elif event.key == pygame.K_SPACE:
+        fire_bullet(ai_settings, screen, ship, bullets)
+
+def fire_bullet(ai_settings, screen, ship, bullets):
+    """fire bullet without reaching limit"""
+    if len(bullets) < ai_settings.bullets_allowed:
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
     
@@ -38,3 +43,12 @@ def update_screen(ai_settings, screen, ship, bullets):
         bullet.draw_bullet()
     ship.blitme()
     pygame.display.flip()
+
+def update_bullets(bullets):
+    """update position of bullets and getting rid of old bullets"""
+    bullets.update()
+
+    for bullet in bullets.copy():
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
+
