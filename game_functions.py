@@ -39,7 +39,7 @@ def check_events(ai_settings, screen, ship, bullets):
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)         
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
     """updates images on screen"""
     screen.fill(ai_settings.bg_color)
     #redraw all bullets behind ship and aliens
@@ -47,6 +47,8 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
         bullet.draw_bullet()
     ship.blitme()
     aliens.draw(screen)
+    if not stats.game_active:
+        play_button.draw_button()
     pygame.display.flip()
 
 def update_bullets(ai_settings, screen, ship, aliens, bullets):
@@ -117,16 +119,19 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     """responds to ship being hit"""
-    #ships_left
-    stats.ships_left -= 1
-    #emptying list of alien and ship
-    aliens.empty()
-    bullets.empty()
-    #center the ship
-    create_fleet(ai_settings, screen, ship, aliens)
-    ship.center_ship()
-    #pause
-    sleep(0.07)
+    if stats.ships_left > 0:
+        #ships_left
+        stats.ships_left -= 1
+        #emptying list of alien and ship
+        aliens.empty()
+        bullets.empty()
+        #center the ship
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
+        #pause
+        sleep(0.07)
+    else:
+        stats.game_active = False
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """check if aliens reached the bottom of the screen"""
@@ -142,6 +147,8 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     check_fleet_edges(ai_settings, aliens)
     """update pos of all aliens"""
     aliens.update()
+    if pygame.sprite.spritecollideany(ship, aliens):
+        ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
 
