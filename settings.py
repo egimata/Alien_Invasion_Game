@@ -9,9 +9,9 @@ class Settings():
         #ship speed
         self.ship_speed_factor = 1
 
-        self.bullet_speed_factor = 1
-        self.bullet_width = 4
-        self.bullet_height = 18
+        self.bullet_speed_factor = 3
+        self.bullet_width = 300
+        self.bullet_height = 60
         self.bullet_color = (255, 51, 51)
         self.bullets_allowed = 7
         self.alien_speed_factor = 1
