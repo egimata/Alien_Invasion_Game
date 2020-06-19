@@ -20,5 +20,11 @@ class Alien(Sprite):
         #store position
         self.x = float(self.rect.x)
     
+    def update(self):
+        self.x += self.ai_settings.alien_speed_factor
+        self.rect.x = self.x
+
+
     def blitme(self):
         self.screen.blit(self.image, self.rect)
+    

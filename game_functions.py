@@ -89,3 +89,7 @@ def create_fleet(ai_settings, screen, ship, aliens):
         for alien_number in range(number_aliens_x):
             create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
+def update_aliens(aliens):
+    """update pos of all aliens"""
+    aliens.update()
+
