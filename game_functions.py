@@ -47,6 +47,9 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     """start new game when clicking play"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
+        ai_settings.initialize_dynamic_settings()
+        #make crusor invis
+        pygame.mouse.set_visible(False)
         #resets game stats
         stats.reset_stats()
         stats.game_active = True
@@ -87,6 +90,7 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
     if len(aliens) == 0:
         #destroy existing alien and create new one in the row
         bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 
@@ -151,6 +155,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         sleep(0.07)
     else:
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """check if aliens reached the bottom of the screen"""
