@@ -20,12 +20,12 @@ class Settings():
         # 1 = right ; -1 = left
         self.fleet_direction = 1
         #game speed on lvlup
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.3
         self.initialize_dynamic_settings()
     
     def initialize_dynamic_settings(self):
         """init settg that change throughout the game"""
-        self.ship_speed_factor = 1.5
+        self.ship_speed_factor = 1
         self.bullet_speed_factor = 3
         self.alien_speed_factor = 1
         self.fleet_direction = 1
