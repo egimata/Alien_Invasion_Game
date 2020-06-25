@@ -29,7 +29,7 @@ def check_keyup_events(event, ship):
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
 
-def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
+def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
      for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -41,18 +41,25 @@ def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y)
+            check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
-def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
+def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y):
     """start new game when clicking play"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         ai_settings.initialize_dynamic_settings()
         #make crusor invis
         pygame.mouse.set_visible(False)
+
         #resets game stats
         stats.reset_stats()
         stats.game_active = True
+
+        #resets scoreboard
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
+
         #empties list of aliens and bullets
         aliens.empty()
         bullets.empty()
@@ -98,6 +105,11 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         #destroy existing alien and create new one in the row
         bullets.empty()
         ai_settings.increase_speed()
+
+        #increase lvl
+        stats.level += 1
+        sb.prep_level()
+
         create_fleet(ai_settings, screen, ship, aliens)
 
 
@@ -185,7 +197,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
 
 def check_high_score(stats, sb):
     if stats.score > stats.high_score:
-        stats.high_score() = stats.score
+        stats.high_score = stats.score
         sb.prep_high_score()
 
 
