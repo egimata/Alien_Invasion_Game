@@ -10,6 +10,10 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_right = True
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
+    elif event.key == pygame.K_UP:
+        ship.moving_up = True
+    elif event.key == pygame.K_DOWN:
+        ship.moving_down = True
     #adding button to fire bullets
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
@@ -28,6 +32,10 @@ def check_keyup_events(event, ship):
         ship.moving_right = False
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
+    elif event.key == pygame.K_UP:
+        ship.moving_up = False
+    elif event.key == pygame.K_DOWN:
+        ship.moving_down = False
 
 def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
      for event in pygame.event.get():
@@ -67,7 +75,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
 
         #creates new fleet and centers the ship
         create_fleet(ai_settings, screen, ship, aliens)
-        ship.center_ship()
+        # ship.center_ship()
 
 def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     """updates images on screen"""

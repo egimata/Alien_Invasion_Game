@@ -12,7 +12,7 @@ class Scoreboard():
         self.stats = stats
 
         #settings for scoring info
-        self.text_color = (30, 30, 30)
+        self.text_color = (255, 245, 245)
         self.font = pygame.font.SysFont("comicsans", 35)
         self.prep_score()
         self.prep_high_score()

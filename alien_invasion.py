@@ -23,6 +23,7 @@ def main():
     def redraw_window():
         screen.blit(ai_settings.bg, (0,0))
         pygame.display.update()
+        
     #play button
     play_button = Button(ai_settings, screen, "Play")
 

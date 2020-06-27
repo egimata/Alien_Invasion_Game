@@ -9,7 +9,8 @@ class Settings():
         #screen settings
         self.screen_width = 1000
         self.screen_height = 600
-        self.bg = pygame.transform.scale(pygame.image.load("images/background.jpg"), (self.screen_width, self.screen_height))
+        self.bg = pygame.transform.scale(pygame.image.load("images/background.png"), (self.screen_width, self.screen_height))
+        
         # self.bg_color = (204, 204, 204)
         #ship speed
         self.ship_speed_factor = 1
