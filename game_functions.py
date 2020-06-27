@@ -71,7 +71,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
 
 def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     """updates images on screen"""
-    screen.fill(ai_settings.bg_color)
+    # screen.fill(ai_settings.bg)
     #redraw all bullets behind ship and aliens
     for bullet in bullets.sprites():
         bullet.draw_bullet()

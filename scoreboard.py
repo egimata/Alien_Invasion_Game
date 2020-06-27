@@ -13,7 +13,7 @@ class Scoreboard():
 
         #settings for scoring info
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont("comicsans", 35)
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
@@ -23,7 +23,7 @@ class Scoreboard():
         score_str = str(self.stats.score)
         rounded_score = int(round(self.stats.score, -1))
         score_str = "{:,}".format(rounded_score)
-        self.score_image = self.font.render(score_str, True, self.text_color, self.ai_settings.bg_color)
+        self.score_image = self.font.render(f"Score: {score_str}", 1, self.text_color, self.ai_settings.bg)
         #display score 
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
@@ -32,14 +32,14 @@ class Scoreboard():
     def prep_high_score(self):
         high_score = int(round(self.stats.high_score, -1))
         high_score_str = "{:,}".format(high_score)
-        self.high_score_image = self.font.render(high_score_str, True, self.text_color, self.ai_settings.bg_color)
+        self.high_score_image = self.font.render(f"High Score: {high_score_str}", 1, self.text_color, self.ai_settings.bg)
         #center hs to top scr
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.centerx = self.screen_rect.centerx
         self.high_score_rect.top = self.score_rect.top
     
     def prep_level(self):
-        self.level_image = self.font.render(str(self.stats.level), True, self.text_color, self.ai_settings.bg_color)
+        self.level_image = self.font.render(f"Level: {str(self.stats.level)}", 1, self.text_color, self.ai_settings.bg)
 
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.screen_rect.right -20

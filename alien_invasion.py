@@ -8,13 +8,21 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 
-def run_game():
+
+
+def main():
     #creating screen object
     pygame.init()
+    # FPS = 60
+    # clock = pygame.time.Clock()
+    
     ai_settings = Settings()
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
+    def redraw_window():
+        screen.blit(ai_settings.bg, (0,0))
+        pygame.display.update()
     #play button
     play_button = Button(ai_settings, screen, "Play")
 
@@ -36,6 +44,8 @@ def run_game():
 
     #main loop of the game
     while True:
+        # clock.tick(FPS)
+        redraw_window()
         gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)
         if stats.game_active:
             ship.update()
@@ -46,6 +56,6 @@ def run_game():
 
     
     
-run_game()
+main()
 
 
